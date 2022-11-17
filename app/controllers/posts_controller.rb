@@ -9,6 +9,10 @@ class PostsController < ApplicationController
       @posts = Post.all
   end
 
+  def show
+    @post = Post.find(allowed_post_params{:id})
+end
+
 
   def create
 
@@ -30,6 +34,10 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    @post = Post.find(allowed_post_params).destroy
+    redirect_to root_url
+     
+
   end
 
   private
