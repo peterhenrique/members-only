@@ -1,20 +1,31 @@
 class PostsController < ApplicationController
 
-  before_action :authenticate_user!
+
+
+
   def index
-    @index = Post.new
-    @indexs = Post.all.order(created_at: :asc)
+
+      @post = Post.new
+      @posts = Post.all
   end
 
+
   def create
-    @post = Post.new(post_params)
-    if @post.save
-      flash[:success] = "thank you for posting"
-      redirect_to @post
-    else
-      flash.now[:error] = "invalid post"
-      render :new, status: :unprocessable_entity
-    end
+
+    @post = Post.new(allowed_post_params)
+    @post.User = current_user
+
+      if @post.save
+        redirect_to root_path
+       else
+        flash[:alert] = "Members Only"
+        redirect_to root_url 
+     
+      end
+  end
+
+
+
 
   end
 
@@ -22,7 +33,7 @@ class PostsController < ApplicationController
   end
 
   private
-  def post_params
-    params.require(:post).permit(:title, :body, :user_id)
+  def allowed_post_params
+    params.require(:post).permit(:title, :body)
   end
-end
+

@@ -1,0 +1,14 @@
+<%= form_with model: @post do |f|      
+  %>
+  <div class >
+  <div class= "grid-flow-col items-center max-w-2xl h-52  m-10" >
+    <div class= " grid align-middle justify-self-center h-1/6"> 
+      <%= f.text_field :title, class: "focus:outline-none focus:ring-transparent", placeholder: "hey"  %> </div>
+
+    <div class= " grid  justify-self-center h-4/6 focus:outline-none focus:ring-transparent" > 
+      <%= f.text_field :body,class: "focus:outline-none focus:ring-transparent focus: shadow-none focus:border-grat-300", placeholder: "what's up?" %> </div>
+    <div class= " grid align-middle justify-self-center h-1/6"> 
+      <%= f.submit "Post" %> 
+    </div>
+  </div>
+<% end %>

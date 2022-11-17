@@ -12,7 +12,7 @@
   </head>
 
   <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+   <div class="container mx-auto mt-28 px-5 flex">
   
 
       <header class=" grid absolute left-0 top-0 h-16 bg-cyan-400 w-full content-center grid-flow-row"> 
@@ -20,23 +20,29 @@
               Members Only
           </h1>
       </header>
+
+      
       <main class="grid grid-flow-col gap-30">
         <div class=" bg-slate-300 w-1/6 grid absolute left-0 ">
           <div class="grid place-self-center ">
-          <% if user_signed_in? %>
-              <p class="mb-4"> 
-                  Signed in as <%= current_user.name %>
-              </p>
-          <% else %>
-              <%= link_to "Sign in", new_user_session_path, class: button_to %>
-        <% end %>
+                  <% if user_signed_in? %>
+                      <p class="mb-4"> 
+                          Signed in as <%= current_user.username %>
+                      </p>
+                      <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: button_to, data: {turbo: false} %>
+                  <% else %>
+                      <%= link_to "Sign in", new_user_session_path, class: button_to %>
+                    <% end %>
+            </div>
         </div>
-        </div>
-        <div class=" grid bg-slate-300 w-5/6 absolute right-0"> 
+        <div class=" grid bg-slate-300 w-5/6 absolute right-0" data-turbo="false"> 
               <%= yield %>
 
-        </div> 
+        </div>
+        </main> 
+        </div>
 
+   
 
 
    
